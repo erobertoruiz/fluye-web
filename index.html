@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fluye — Automatización que fluye</title>
+<meta name="description" content="Agencia de automatización en Las Palmas. Automatizamos las partes repetitivas de tu negocio para que el equipo dedique el tiempo a lo que de verdad importa.">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --verde: #2D4A3E;
+  --verde-oscuro: #1E3329;
+  --crema: #F5F0E8;
+  --crema-oscuro: #E8E2D5;
+  --texto: #1a1a1a;
+  --texto-suave: #555;
+  --sans: 'Arial', 'Helvetica', sans-serif;
+  --serif: 'Georgia', 'Times New Roman', serif;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--serif);
+  background: var(--crema);
+  color: var(--texto);
+  line-height: 1.65;
+}
+
+/* ── NAVEGACIÓN ── */
+nav {
+  background: var(--verde-oscuro);
+  padding: 24px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.nav-logo svg {
+  height: 108px;
+  width: auto;
+  display: block;
+}
+
+.nav-cta {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--crema);
+  background: var(--verde);
+  padding: 12px 24px;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: #3a5e50; }
+
+/* ── HERO ── */
+.hero {
+  background: var(--verde-oscuro);
+  padding: 96px 48px 100px;
+  text-align: center;
+}
+
+.hero-eyebrow {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: rgba(245,240,232,0.5);
+  margin-bottom: 28px;
+}
+
+.hero h1 {
+  font-family: var(--serif);
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: normal;
+  color: var(--crema);
+  line-height: 1.2;
+  max-width: 720px;
+  margin: 0 auto 24px;
+}
+
+.hero-sub {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: rgba(245,240,232,0.7);
+  max-width: 560px;
+  margin: 0 auto 44px;
+  line-height: 1.7;
+}
+
+.btn-primary {
+  display: inline-block;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--verde-oscuro);
+  background: var(--crema);
+  padding: 16px 36px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-primary:hover { background: #e8e2d5; }
+
+/* ── SECCIÓN GENÉRICA ── */
+.section {
+  padding: 80px 48px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.section-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--verde);
+  margin-bottom: 28px;
+  border-bottom: 1px solid var(--crema-oscuro);
+  padding-bottom: 8px;
+}
+
+/* ── PROBLEMA ── */
+.problema-texto {
+  font-family: var(--serif);
+  font-size: 22px;
+  line-height: 1.65;
+  color: var(--texto);
+  max-width: 700px;
+}
+
+/* ── CÓMO TRABAJAMOS ── */
+.como-wrap {
+  background: white;
+  padding: 48px;
+  border-top: 3px solid var(--verde);
+}
+
+.como-texto {
+  font-family: var(--serif);
+  font-size: 18px;
+  color: var(--texto-suave);
+  line-height: 1.75;
+  max-width: 640px;
+  margin-bottom: 32px;
+}
+
+.como-texto p + p {
+  margin-top: 20px;
+}
+
+.como-nota {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--texto-suave);
+  border-top: 1px solid var(--crema-oscuro);
+  padding-top: 20px;
+  line-height: 1.6;
+}
+
+.como-nota a {
+  color: var(--verde);
+  text-decoration: none;
+  border-bottom: 1px solid var(--crema-oscuro);
+}
+
+/* ── COTORRA ── */
+.cotorra-wrap {
+  background: var(--crema-oscuro);
+  padding: 48px;
+}
+
+.cotorra-eyebrow {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: var(--verde);
+  margin-bottom: 8px;
+}
+
+.cotorra-titulo {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: normal;
+  color: var(--texto);
+  margin-bottom: 16px;
+}
+
+.cotorra-resumen {
+  font-family: var(--serif);
+  font-size: 17px;
+  color: var(--texto-suave);
+  line-height: 1.7;
+  max-width: 580px;
+  margin-bottom: 32px;
+}
+
+.cotorra-hace h3 {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--verde);
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--crema-oscuro);
+  padding-bottom: 8px;
+}
+
+.cotorra-hace ul {
+  list-style: none;
+  max-width: 560px;
+}
+
+.cotorra-hace ul li {
+  font-family: var(--sans);
+  font-size: 14px;
+  color: var(--texto-suave);
+  padding: 10px 0 10px 22px;
+  position: relative;
+  border-bottom: 1px solid var(--crema-oscuro);
+  line-height: 1.5;
+}
+
+.cotorra-hace ul li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--verde);
+  font-weight: bold;
+}
+
+/* ── CÓMO FUNCIONA ── */
+.pasos-wrap {
+  background: var(--verde-oscuro);
+  padding: 80px 48px;
+}
+
+.pasos-inner {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.pasos-label {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: rgba(245,240,232,0.4);
+  margin-bottom: 48px;
+  border-bottom: 1px solid rgba(245,240,232,0.1);
+  padding-bottom: 8px;
+}
+
+.pasos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 48px;
+}
+
+.paso {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.paso-numero {
+  font-family: var(--serif);
+  font-size: 56px;
+  font-weight: normal;
+  color: rgba(245,240,232,0.15);
+  line-height: 1;
+}
+
+.paso h3 {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--crema);
+}
+
+.paso p {
+  font-family: var(--serif);
+  font-size: 15px;
+  color: rgba(245,240,232,0.65);
+  line-height: 1.65;
+}
+
+/* ── PARA QUIÉN ── */
+.para-quien-wrap {
+  background: var(--crema);
+  padding: 80px 0;
+}
+
+.para-quien-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+
+.para-quien-texto {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: var(--texto);
+  line-height: 1.7;
+  max-width: 640px;
+}
+
+/* ── PRICING ── */
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-bottom: 32px;
+}
+
+.tier {
+  background: white;
+  padding: 32px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+}
+
+.tier.destacado {
+  background: var(--verde-oscuro);
+  border-top: 3px solid var(--verde);
+}
+
+.tier-badge {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--crema);
+  background: var(--verde);
+  padding: 4px 10px;
+  display: inline-block;
+  position: absolute;
+  top: -1px;
+  left: 24px;
+}
+
+.tier-nombre {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: var(--verde);
+  margin-top: 8px;
+}
+
+.tier.destacado .tier-nombre { color: rgba(245,240,232,0.5); }
+
+.tier-setup {
+  font-family: var(--serif);
+  font-size: 28px;
+  font-weight: normal;
+  color: var(--texto);
+  margin-top: 8px;
+  line-height: 1;
+}
+
+.tier.destacado .tier-setup { color: var(--crema); }
+
+.tier-setup span {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--texto-suave);
+  font-weight: normal;
+}
+
+.tier.destacado .tier-setup span { color: rgba(245,240,232,0.5); }
+
+.tier-mensual {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--verde);
+  margin-top: 4px;
+}
+
+.tier.destacado .tier-mensual { color: var(--crema); }
+
+.tier-para {
+  font-family: var(--serif);
+  font-size: 13.5px;
+  color: var(--texto-suave);
+  line-height: 1.5;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--crema-oscuro);
+}
+
+.tier.destacado .tier-para {
+  color: rgba(245,240,232,0.6);
+  border-top-color: rgba(245,240,232,0.1);
+}
+
+.piloto-bloque {
+  background: white;
+  border-left: 3px solid var(--verde);
+  padding: 24px 28px;
+  margin-bottom: 24px;
+}
+
+.piloto-bloque h3 {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--verde);
+  margin-bottom: 12px;
+}
+
+.piloto-bloque p {
+  font-family: var(--serif);
+  font-size: 15px;
+  color: var(--texto-suave);
+  line-height: 1.65;
+  margin-bottom: 10px;
+}
+
+.piloto-precio {
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--texto);
+}
+
+.nota-api {
+  font-family: var(--sans);
+  font-size: 11.5px;
+  color: #aaa;
+  line-height: 1.5;
+  padding: 16px 0;
+  border-top: 1px solid var(--crema-oscuro);
+}
+
+/* ── CTA FINAL ── */
+.cta-final {
+  background: var(--verde-oscuro);
+  padding: 80px 48px;
+  text-align: center;
+}
+
+.cta-final-inner {
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+.cta-final h2 {
+  font-family: var(--serif);
+  font-size: 30px;
+  font-weight: normal;
+  color: var(--crema);
+  line-height: 1.35;
+  margin-bottom: 16px;
+}
+
+.cta-final p {
+  font-family: var(--serif);
+  font-size: 17px;
+  color: rgba(245,240,232,0.65);
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+.cta-botones {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.btn-wa {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--verde-oscuro);
+  background: var(--crema);
+  padding: 16px 28px;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.btn-wa:hover { background: #e8e2d5; }
+
+.btn-email {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--crema);
+  background: transparent;
+  border: 1px solid rgba(245,240,232,0.3);
+  padding: 16px 28px;
+  text-decoration: none;
+  transition: border-color 0.2s;
+}
+.btn-email:hover { border-color: var(--crema); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--verde-oscuro);
+  border-top: 1px solid rgba(245,240,232,0.08);
+  padding: 28px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo svg { height: 28px; width: auto; }
+
+.footer-texto {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: rgba(245,240,232,0.3);
+  text-align: right;
+  line-height: 1.6;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  nav { padding: 16px 24px; }
+  .nav-logo svg { height: 72px; }
+  .hero { padding: 64px 24px 72px; }
+  .section { padding: 60px 24px; }
+  .pasos-wrap, .cta-final { padding: 60px 24px; }
+  .para-quien-inner { padding: 0 24px; }
+  .pasos-grid { grid-template-columns: 1fr; gap: 32px; }
+  .pricing-grid { grid-template-columns: 1fr; gap: 8px; }
+  .como-wrap, .cotorra-wrap { padding: 32px 24px; }
+  footer { flex-direction: column; gap: 16px; text-align: center; }
+  .footer-texto { text-align: center; }
+  .cta-botones { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ── NAVEGACIÓN ── -->
+<nav>
+  <div class="nav-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 203 189" aria-label="Fluye">
+      <style>.lb{fill:#ffffff}</style>
+      <g>
+        <path class="lb" d="M44.56514,141.70276v-36.04199h22.45752l-.0249,4.03809h-17.69678v11.91406h15.90234v3.98828h-15.90234v16.10156h-4.73584Z"/>
+        <path class="lb" d="M79.73409,142.02697c-1.39551,0-2.52148-.19141-3.37695-.57324-.85645-.38184-1.5127-.89746-1.96924-1.5459-.45752-.64746-.76904-1.3916-.93457-2.23047-.1665-.83887-.24951-1.70703-.24951-2.60449v-30.40918h4.56152v29.95996c0,1.29688.25293,2.26855.76025,2.91699.50635.64746,1.2168,1.00488,2.13086,1.07129l1.396.02539v2.99023c-.38281.11621-.78125.21191-1.19678.28711s-.78906.1123-1.12158.1123Z"/>
+        <path class="lb" d="M96.98262,142.2008c-1.34619-.0166-2.61328-.21094-3.80127-.58496s-2.23926-.92676-3.15283-1.6582c-.91406-.73047-1.63281-1.64062-2.15625-2.72852-.52344-1.08887-.78516-2.35547-.78516-3.80176v-17.49707h4.61133v17.02344c0,1.67871.51904,3.04102,1.55762,4.08789s2.60498,1.57031,4.69873,1.57031c1.89404,0,3.41846-.49414,4.57373-1.4834,1.1543-.98828,1.73242-2.46289,1.73242-4.42383v-16.77441h4.58594v25.77246h-3.66406l-.47363-4.93555c-.31543,1.29688-.85156,2.34375-1.60742,3.14062-.75635.79785-1.66211,1.38379-2.7168,1.75781-1.05566.37402-2.18945.55176-3.40234.53516Z"/>
+        <path class="lb" d="M119.01583,149.92834c-1.5127,0-2.83301-.2168-3.96289-.64844v-2.99121l2.6416.0498c.94727.0332,1.73633-.0332,2.36816-.19922.63086-.16602,1.1377-.39062,1.52051-.67285.38184-.2832.67676-.59863.88477-.94727s.37793-.68164.51074-.99707l.89746-2.44238-10.06934-25.14941h4.66016l7.60254,19.88965,7.55273-19.88965h4.51074l-10.8418,27.7168c-.68164,1.62793-1.43359,2.89941-2.25586,3.81348-.82227.91309-1.73633,1.55371-2.74219,1.91895-1.00488.36523-2.09766.54883-3.27734.54883Z"/>
+        <path class="lb" d="M153.51192,142.2008c-2.39258,0-4.50391-.52344-6.33105-1.57031-1.82812-1.0459-3.25684-2.5498-4.28711-4.51074s-1.5459-4.3125-1.5459-7.05371c0-2.70898.46582-5.08496,1.39648-7.12891.92969-2.04395,2.28027-3.63867,4.0498-4.78516,1.76953-1.14746,3.90137-1.7207,6.39355-1.7207,2.42578,0,4.47754.52344,6.15625,1.57031s2.9541,2.52246,3.82617,4.4248,1.30859,4.1582,1.30859,6.7666v1.69531h-18.46973c0,1.62891.27051,3.10352.81055,4.42383.53906,1.32129,1.3584,2.37207,2.45508,3.15332s2.4834,1.17188,4.16211,1.17188c1.64551,0,3.06152-.38281,4.25-1.14648,1.1875-.76465,1.94824-1.87012,2.28027-3.31543h4.33691c-.29883,1.74512-.99316,3.21484-2.08105,4.41211-1.08789,1.19629-2.39258,2.09766-3.91309,2.7041s-3.12012.90918-4.79785.90918ZM146.03438,126.77307h14.00781c0-1.47949-.24902-2.8125-.74805-4.00098-.49805-1.1875-1.25879-2.12695-2.28027-2.81641-1.02246-.68945-2.30566-1.03418-3.85156-1.03418-1.61133,0-2.94922.38574-4.0127,1.1582-1.06348.77344-1.85254,1.76172-2.36816,2.9668-.51465,1.20508-.76367,2.44629-.74707,3.72656Z"/>
+      </g>
+      <path class="lb" d="M35.77618,78.96692c15.30048-4.44653,29.79765-4.904,44.59571,1.39702,8.20226,3.40305,16.47227,7.95931,25.64886,8.89701,7.79786.89081,16.25961-.95713,23.23948-4.24321.60704-.28579.30121-1.20825-.35639-1.07513-7.12919,1.44317-15.08687,2.20258-22.1456.64002-10.25359-2.05249-20.0007-9.15128-30.71795-12.03399-14.15573-3.75829-27.98434-1.83209-40.64226,5.39332,0,0-.59244.31766-.401.75522.21359.48821.77916.26974.77916.26974Z"/>
+      <path class="lb" d="M45.52242,59.90968c18.04774-4.83083,35.12309-1.23721,52.50806,5.86421,9.63674,3.83681,19.34563,7.9548,30.14607,9.06051,9.17711,1.04398,19.15415-.94892,27.39561-4.54936.71675-.31313.36271-1.33972-.41259-1.19649-8.4051,1.55272-17.78134,2.34029-26.08359.55547-12.06137-2.35131-23.49293-9.30329-36.09483-12.57986-16.64538-4.27307-32.94312-6.23089-47.89727,1.70458,0,0-.69977.34863-.47723.83591.2483.54368.91578.30502.91578.30502Z"/>
+      <path class="lb" d="M71.66885,45.30294c15.71814-4.44653,30.25268-.08771,45.45468,6.2133,8.42616,3.40305,17.22349,5.88168,26.63524,5.74116,8.05919-.12032,16.77557-2.61758,23.94597-5.90366.62361-.28579.30944-1.20825-.36612-1.07513-7.3238,1.44317-15.57082,3.86303-22.82223,2.30046-10.53348-2.05249-20.67992-6.63661-31.74858-10.07317-13.80895-4.28736-28.48398-5.45334-41.48743,1.77206,0,0-.60861.31766-.41195.75522.21942.48821.80042.26974.80042.26974Z"/>
+    </svg>
+  </div>
+  <a href="#contacto" class="nav-cta">Cuéntanos tu caso</a>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <p class="hero-eyebrow">Menos tiempo gestionando. Más tiempo en lo que sabes hacer.</p>
+  <h1>Automatización que fluye</h1>
+  <p class="hero-sub">Automatizamos las partes repetitivas de tu negocio para que el equipo dedique el tiempo a lo que de verdad importa. Local, sin soporte en otro país, sin tickets de soporte.</p>
+  <a href="#contacto" class="btn-primary">Cuéntanos tu caso</a>
+</section>
+
+<!-- ── EL PROBLEMA ── -->
+<section style="background: var(--crema); padding: 80px 0;">
+  <div class="section" style="padding-top: 0; padding-bottom: 0;">
+    <p class="section-label">El problema</p>
+    <p class="problema-texto">Hay horas que desaparecen sin que nadie las reclame. Responder lo que ya se respondió ayer. Hacer seguimiento de lo que debería seguirse solo. Gestionar lo urgente que nunca debería haber llegado a urgente. No es que el negocio vaya mal — es que una parte del día se consume en sostenerlo en lugar de hacerlo crecer. Eso tiene solución.</p>
+  </div>
+</section>
+
+<!-- ── CÓMO TRABAJAMOS ── -->
+<section style="background: var(--crema); padding: 0 0 80px;">
+  <div class="section" style="padding-top: 40px; padding-bottom: 0;">
+    <p class="section-label">Cómo trabajamos</p>
+    <div class="como-wrap">
+      <div class="como-texto">
+        <p>Analizamos qué parte de tu operativa se repite y tiene solución. Diseñamos el sistema. Lo montamos. Lo mantenemos. Sin que tengas que entender cómo está hecho por dentro.</p>
+        <p>Cuando los procesos repetitivos funcionan solos, el equipo recupera tiempo real. No horas teóricas — horas de cada día. Ese es el único resultado que nos importa medir.</p>
+      </div>
+      <p class="como-nota">Cotorra es nuestro primer producto empaquetado. Si tienes un proceso repetitivo que no encaja exactamente aquí, cuéntanoslo — es probable que tenga solución.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── COTORRA ── -->
+<section style="background: var(--crema-oscuro); padding: 80px 0;">
+  <div class="section" style="padding-top: 0; padding-bottom: 0;">
+    <p class="section-label">Nuestro primer producto</p>
+    <div class="cotorra-wrap">
+      <p class="cotorra-eyebrow">Producto</p>
+      <h2 class="cotorra-titulo">Cotorra</h2>
+      <p class="cotorra-resumen">Un agente de atención para operadores de actividades turísticas en Canarias. Gestiona las consultas de los clientes a cualquier hora, en su idioma, y avisa al equipo cuando hace falta intervención humana.</p>
+      <div class="cotorra-hace">
+        <h3>Qué hace</h3>
+        <ul>
+          <li>Responde preguntas frecuentes en el idioma del cliente — precios, horarios, punto de encuentro, equipamiento, cancelaciones</li>
+          <li>Precalifica la reserva: recoge fecha, número de personas, nivel y necesidades especiales</li>
+          <li>Envía el enlace de reserva o pago cuando el cliente está listo</li>
+          <li>Avisa al equipo con el contexto completo cuando algo requiere decisión humana</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CÓMO FUNCIONA ── -->
+<div class="pasos-wrap">
+  <div class="pasos-inner">
+    <p class="pasos-label">Cómo funciona</p>
+    <div class="pasos-grid">
+      <div class="paso">
+        <div class="paso-numero">1</div>
+        <h3>Diagnóstico</h3>
+        <p>Una conversación para entender dónde se pierde tiempo en tu negocio.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-numero">2</div>
+        <h3>Implementación</h3>
+        <p>Montamos el sistema. Sin que tengas que aprender nada nuevo.</p>
+      </div>
+      <div class="paso">
+        <div class="paso-numero">3</div>
+        <h3>Mantenimiento</h3>
+        <p>Está funcionando. Si algo cambia, lo ajustamos. Estamos en Las Palmas.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── PARA QUIÉN ── -->
+<div class="para-quien-wrap">
+  <div class="para-quien-inner">
+    <p class="section-label">Para quién</p>
+    <p class="para-quien-texto">Para negocios de 1 a 30 personas que gestionan volumen — consultas, citas, leads, contenido — con un equipo que no puede estar pendiente de todo a la vez. El sector importa menos que el problema.</p>
+  </div>
+</div>
+
+<!-- ── PRICING ── -->
+<section style="background: var(--crema); padding: 80px 0;">
+  <div class="section" style="padding-top: 0; padding-bottom: 0;">
+    <p class="section-label">Pricing — Cotorra</p>
+
+    <div class="piloto-bloque">
+      <h3>Piloto — plazas limitadas</h3>
+      <p>Tres plazas a precio de entrada para documentar los primeros casos de éxito. Sin compromiso de continuación.</p>
+      <p class="piloto-precio">200 € setup · 99 €/mes durante 60 días</p>
+    </div>
+
+    <div class="pricing-grid">
+      <div class="tier">
+        <span class="tier-nombre">Starter</span>
+        <div class="tier-setup">400 € <span>setup</span></div>
+        <div class="tier-mensual">149 €/mes</div>
+        <p class="tier-para">1 actividad, bajo volumen. Para empezar sin compromiso alto.</p>
+      </div>
+      <div class="tier destacado">
+        <span class="tier-badge">Más popular</span>
+        <span class="tier-nombre">Pro</span>
+        <div class="tier-setup">700 € <span>setup</span></div>
+        <div class="tier-mensual">249 €/mes</div>
+        <p class="tier-para">Varias actividades, informe mensual con métricas y leads cualificados.</p>
+      </div>
+      <div class="tier">
+        <span class="tier-nombre">Growth</span>
+        <div class="tier-setup">1.000 € <span>setup</span></div>
+        <div class="tier-mensual">399 €/mes</div>
+        <p class="tier-para">Multi-actividad, reglas por temporada, informe semanal, actualizaciones ilimitadas.</p>
+      </div>
+    </div>
+
+    <p class="nota-api">El coste de la API de mensajería (aprox. 5-20 €/mes según volumen) va directamente al proveedor y no está incluido en la mensualidad. Fluye os ayuda a configurarlo en el setup.</p>
+  </div>
+</section>
+
+<!-- ── CTA FINAL ── -->
+<div class="cta-final" id="contacto">
+  <div class="cta-final-inner">
+    <h2>Estamos en Las Palmas</h2>
+    <p>Una llamada de 30 minutos para entender vuestro negocio. Si hay algo que podamos automatizar con sentido real, os lo decimos. Si no, también.</p>
+    <div class="cta-botones">
+      <a href="https://wa.me/34656995798?text=Hola%2C%20me%20interesa%20saber%20m%C3%A1s%20sobre%20Fluye" class="btn-wa">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        WhatsApp
+      </a>
+      <a href="mailto:hola@fluye.pro" class="btn-email">hola@fluye.pro</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 203 189" aria-label="Fluye">
+      <style>.lbf{fill:#ffffff}</style>
+      <g>
+        <path class="lbf" d="M44.56514,141.70276v-36.04199h22.45752l-.0249,4.03809h-17.69678v11.91406h15.90234v3.98828h-15.90234v16.10156h-4.73584Z"/>
+        <path class="lbf" d="M79.73409,142.02697c-1.39551,0-2.52148-.19141-3.37695-.57324-.85645-.38184-1.5127-.89746-1.96924-1.5459-.45752-.64746-.76904-1.3916-.93457-2.23047-.1665-.83887-.24951-1.70703-.24951-2.60449v-30.40918h4.56152v29.95996c0,1.29688.25293,2.26855.76025,2.91699.50635.64746,1.2168,1.00488,2.13086,1.07129l1.396.02539v2.99023c-.38281.11621-.78125.21191-1.19678.28711s-.78906.1123-1.12158.1123Z"/>
+        <path class="lbf" d="M96.98262,142.2008c-1.34619-.0166-2.61328-.21094-3.80127-.58496s-2.23926-.92676-3.15283-1.6582c-.91406-.73047-1.63281-1.64062-2.15625-2.72852-.52344-1.08887-.78516-2.35547-.78516-3.80176v-17.49707h4.61133v17.02344c0,1.67871.51904,3.04102,1.55762,4.08789s2.60498,1.57031,4.69873,1.57031c1.89404,0,3.41846-.49414,4.57373-1.4834,1.1543-.98828,1.73242-2.46289,1.73242-4.42383v-16.77441h4.58594v25.77246h-3.66406l-.47363-4.93555c-.31543,1.29688-.85156,2.34375-1.60742,3.14062-.75635.79785-1.66211,1.38379-2.7168,1.75781-1.05566.37402-2.18945.55176-3.40234.53516Z"/>
+        <path class="lbf" d="M119.01583,149.92834c-1.5127,0-2.83301-.2168-3.96289-.64844v-2.99121l2.6416.0498c.94727.0332,1.73633-.0332,2.36816-.19922.63086-.16602,1.1377-.39062,1.52051-.67285.38184-.2832.67676-.59863.88477-.94727s.37793-.68164.51074-.99707l.89746-2.44238-10.06934-25.14941h4.66016l7.60254,19.88965,7.55273-19.88965h4.51074l-10.8418,27.7168c-.68164,1.62793-1.43359,2.89941-2.25586,3.81348-.82227.91309-1.73633,1.55371-2.74219,1.91895-1.00488.36523-2.09766.54883-3.27734.54883Z"/>
+        <path class="lbf" d="M153.51192,142.2008c-2.39258,0-4.50391-.52344-6.33105-1.57031-1.82812-1.0459-3.25684-2.5498-4.28711-4.51074s-1.5459-4.3125-1.5459-7.05371c0-2.70898.46582-5.08496,1.39648-7.12891.92969-2.04395,2.28027-3.63867,4.0498-4.78516,1.76953-1.14746,3.90137-1.7207,6.39355-1.7207,2.42578,0,4.47754.52344,6.15625,1.57031s2.9541,2.52246,3.82617,4.4248,1.30859,4.1582,1.30859,6.7666v1.69531h-18.46973c0,1.62891.27051,3.10352.81055,4.42383.53906,1.32129,1.3584,2.37207,2.45508,3.15332s2.4834,1.17188,4.16211,1.17188c1.64551,0,3.06152-.38281,4.25-1.14648,1.1875-.76465,1.94824-1.87012,2.28027-3.31543h4.33691c-.29883,1.74512-.99316,3.21484-2.08105,4.41211-1.08789,1.19629-2.39258,2.09766-3.91309,2.7041s-3.12012.90918-4.79785.90918ZM146.03438,126.77307h14.00781c0-1.47949-.24902-2.8125-.74805-4.00098-.49805-1.1875-1.25879-2.12695-2.28027-2.81641-1.02246-.68945-2.30566-1.03418-3.85156-1.03418-1.61133,0-2.94922.38574-4.0127,1.1582-1.06348.77344-1.85254,1.76172-2.36816,2.9668-.51465,1.20508-.76367,2.44629-.74707,3.72656Z"/>
+      </g>
+      <path class="lbf" d="M35.77618,78.96692c15.30048-4.44653,29.79765-4.904,44.59571,1.39702,8.20226,3.40305,16.47227,7.95931,25.64886,8.89701,7.79786.89081,16.25961-.95713,23.23948-4.24321.60704-.28579.30121-1.20825-.35639-1.07513-7.12919,1.44317-15.08687,2.20258-22.1456.64002-10.25359-2.05249-20.0007-9.15128-30.71795-12.03399-14.15573-3.75829-27.98434-1.83209-40.64226,5.39332,0,0-.59244.31766-.401.75522.21359.48821.77916.26974.77916.26974Z"/>
+      <path class="lbf" d="M45.52242,59.90968c18.04774-4.83083,35.12309-1.23721,52.50806,5.86421,9.63674,3.83681,19.34563,7.9548,30.14607,9.06051,9.17711,1.04398,19.15415-.94892,27.39561-4.54936.71675-.31313.36271-1.33972-.41259-1.19649-8.4051,1.55272-17.78134,2.34029-26.08359.55547-12.06137-2.35131-23.49293-9.30329-36.09483-12.57986-16.64538-4.27307-32.94312-6.23089-47.89727,1.70458,0,0-.69977.34863-.47723.83591.2483.54368.91578.30502.91578.30502Z"/>
+      <path class="lbf" d="M71.66885,45.30294c15.71814-4.44653,30.25268-.08771,45.45468,6.2133,8.42616,3.40305,17.22349,5.88168,26.63524,5.74116,8.05919-.12032,16.77557-2.61758,23.94597-5.90366.62361-.28579.30944-1.20825-.36612-1.07513-7.3238,1.44317-15.57082,3.86303-22.82223,2.30046-10.53348-2.05249-20.67992-6.63661-31.74858-10.07317-13.80895-4.28736-28.48398-5.45334-41.48743,1.77206,0,0-.60861.31766-.41195.75522.21942.48821.80042.26974.80042.26974Z"/>
+    </svg>
+  </div>
+  <div class="footer-texto">
+    <div>fluye.pro · Las Palmas de Gran Canaria</div>
+    <div>hola@fluye.pro</div>
+  </div>
+</footer>
+
+</body>
+</html>
