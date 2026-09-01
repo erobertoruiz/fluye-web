@@ -7,6 +7,7 @@ Fluye es una agencia pequeña, fundada y operada por Rober. No es una plataforma
 ## Servicios
 
 - **Cotorra**: agente de atención al cliente para operadores de actividades turísticas en Canarias (escuelas de surf, centros de buceo, excursiones en barco, kayak, kitesurf, avistamiento de cetáceos). Responde consultas en el idioma del cliente, precalifica la reserva y escala a una persona del equipo cuando hace falta una decisión humana. Pricing público en la web: desde 400€ de puesta en marcha + 149€/mes; el desglose completo se comparte por WhatsApp, no está publicado como tabla.
+- **Automatización para importadores y distribuidores en Las Palmas de Gran Canaria**: sistemas que ordenan la gestión de pedidos, facturas y seguimientos con proveedores y clientes — evitan volver a teclear a mano lo que llega por correo o PDF, y detectan antes las facturas que no cuadran con el pedido. Sin tarifa publicada; se cotiza en conversación directa. En fase de primeros pilotos, sin clientes de referencia con nombre todavía.
 - **Automatización para agencias digitales**: sistemas a medida (por ejemplo, recordatorios automáticos de evento) que una agencia digital revende a su propia cartera de clientes, en modelo white-label (Fluye construye y mantiene, la agencia factura al cliente final).
 
 ## Contacto
