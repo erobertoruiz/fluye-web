@@ -228,7 +228,6 @@ nav {
 }
 .nav-links a:hover { color: var(--verde-oscuro); }
 
-.nav-cta { padding: 11px 20px; font-size: 12px; }
 
 /* ── HERO ── */
 /* Foto real de Rober: mar en calma, Orquilla (El Hierro). Origen: 05_fluye/brand/img/orchilla.jpg */
@@ -812,13 +811,20 @@ footer {
   .turismo-foto { aspect-ratio: 16 / 10; order: -1; }
 }
 
+/* 1 oct 2026: sin botón CTA en el nav (duplicaba el del hero); los enlaces a
+   las landings se ven también en móvil, más compactos. */
+.nav-pill { padding-right: 28px; }
 @media (max-width: 760px) {
-  .nav-links { display: none; }
+  .nav-links { gap: 16px; font-size: 13px; }
+}
+@media (max-width: 400px) {
+  .nav-pill { padding-right: 16px; gap: 12px; }
+  .nav-links { gap: 12px; font-size: 12.5px; }
 }
 
 @media (max-width: 640px) {
   nav { padding: 14px 16px; }
-  .nav-pill { padding: 6px 8px 6px 18px; }
+  .nav-pill { padding: 6px 18px; }
   .nav-logo svg { height: 38px; }
   .wrap { padding: 0 20px; }
   .hero { padding: 40px 0; min-height: calc(100vh - 85px); min-height: calc(100svh - 85px); }
