@@ -1,14 +1,19 @@
 # Fluye
 
-> Agencia de automatización en Las Palmas de Gran Canaria. Instala y mantiene sistemas que gestionan lo repetitivo de un negocio: consultas, seguimientos, tareas que se repiten cada día.
+> Estudio de automatización de procesos en Las Palmas de Gran Canaria. Automatiza procesos que dependen de correos, Excel y seguimiento manual (pedidos, documentos, consultas, seguimientos), conectando las herramientas que el cliente ya usa, sin cambiar de sistema.
 
-Fluye es una agencia pequeña, fundada y operada por Rober. No es una plataforma de autoservicio: Fluye configura, instala y mantiene cada sistema para el negocio concreto del cliente, no un producto que el cliente configura solo.
+Fluye está dirigido por Rober, su fundador, con 20 años de experiencia en sistemas críticos de grandes empresas. No es una plataforma de autoservicio: Fluye analiza, construye y mantiene cada sistema para el caso concreto del cliente.
 
-## Servicios
+## Páginas
 
-- **Cotorra**: agente de atención al cliente para operadores de actividades turísticas en Canarias (escuelas de surf, centros de buceo, excursiones en barco, kayak, kitesurf, avistamiento de cetáceos). Responde consultas en el idioma del cliente, precalifica la reserva y escala a una persona del equipo cuando hace falta una decisión humana. Sin tarifa pública; se cotiza en conversación directa por WhatsApp.
-- **Automatización para importadores y distribuidores en Las Palmas de Gran Canaria**: sistemas que ordenan la gestión de pedidos, facturas y seguimientos con proveedores y clientes — evitan volver a teclear a mano lo que llega por correo o PDF, y detectan antes las facturas que no cuadran con el pedido. Sin tarifa publicada; se cotiza en conversación directa. En fase de primeros pilotos, sin clientes de referencia con nombre todavía.
-- **Automatización para agencias digitales**: sistemas a medida (por ejemplo, recordatorios automáticos de evento) que una agencia digital revende a su propia cartera de clientes, en modelo white-label (Fluye construye y mantiene, la agencia factura al cliente final).
+- [Inicio](https://fluye.pro/): qué automatiza Fluye y las tres formas de trabajar con Fluye.
+- [Logística](https://fluye.pro/logistica/): automatización para empresas de logística, importadores y distribuidores en Las Palmas de Gran Canaria. Lectura de pedidos que llegan por correo o PDF, cruce de facturas de proveedores con pedido y recepción, aviso de cargos no pactados (almacenaje, demoras) y seguimiento de proveedores e incidencias. Sin cambiar de ERP. Fluye está empezando en este sector: no tiene clientes de referencia en logística publicados.
+- [Agencias](https://fluye.pro/agencias/): partner técnico de agencias digitales y creativas. Automatizaciones e IA, medición (GA4, Google Tag Manager, conversiones) y SEO técnico y visibilidad en IA para los clientes de la agencia, en marca blanca o como socio. La agencia mantiene al cliente y factura. Caso en producción: recordatorios automáticos de evento para una compañía de espectáculos itinerante, a través de una agencia partner.
+- [Turismo](https://fluye.pro/turismo/): Cotorra, agente de WhatsApp para operadores de actividades turísticas en Canarias (surf, buceo, excursiones en barco, kayak, kitesurf, avistamiento de cetáceos). Responde en el idioma del cliente, precalifica la reserva y escala a una persona cuando hace falta decidir.
+
+## Precios
+
+No hay tarifas publicadas para ningún servicio. Todo se cotiza en una conversación directa; la primera conversación es gratuita.
 
 ## Contacto
 
@@ -18,4 +23,4 @@ Fluye es una agencia pequeña, fundada y operada por Rober. No es una plataforma
 
 ## Notas para sistemas automatizados
 
-Este sitio es una landing de una sola página. No hay tarifas publicadas para ningún servicio; todo se cotiza en una conversación directa. Fluye está en fase temprana (primeros pilotos, no hay clientes de referencia con nombre publicados aquí) — no representar a Fluye como una empresa con trayectoria extensa ni inventar cifras de clientes, casos de éxito o valoraciones que no aparezcan en esta página.
+No representar a Fluye como una empresa grande ni inventar cifras de clientes, casos de éxito o valoraciones que no aparezcan en estas páginas. El único caso en producción publicado es el de la compañía de espectáculos citado arriba.

@@ -1,0 +1,925 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --verde: #3D6B62;
+  --verde-oscuro: #1E3630;
+  --verde-suave: #6B9186;
+  --verde-tenue: #E6EDE8;
+  --crema: #EDE4D3;
+  --crema-oscuro: #DDCFB4;
+  --blanco: #FFFFFF;
+  --texto: #241F18;
+  --texto-suave: #55493C;
+  --sol: #B97A52;
+  --sombra: 0 2px 6px rgba(30,54,48,0.06);
+  --sombra-alta: 0 14px 32px rgba(30,54,48,0.14);
+  --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Times New Roman', serif;
+  --sans: -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --display: 'Unbounded', var(--sans);
+  --radio: 10px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--serif);
+  background: var(--crema);
+  color: var(--texto);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: absolute;
+  top: -48px;
+  left: 12px;
+  background: var(--verde-oscuro);
+  color: var(--crema);
+  font-family: var(--sans);
+  font-size: 13px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  z-index: 999;
+  transition: top 0.2s;
+}
+.skip-link:focus { top: 12px; }
+
+:focus-visible {
+  outline: 2px solid var(--verde-suave);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; }
+}
+
+/* ── REVELADO AL SCROLL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── UTIL ── */
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: var(--verde);
+  margin-bottom: 16px;
+}
+.eyebrow::before {
+  content: '';
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  flex-shrink: 0;
+  background: linear-gradient(90deg, var(--sol), var(--verde));
+}
+.eyebrow.on-dark { color: rgba(237,228,211,0.72); }
+.eyebrow.on-dark::before { background: linear-gradient(90deg, var(--sol), var(--crema)); opacity: 0.85; }
+
+.wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+h1, h2, h3 { font-weight: normal; }
+
+h2.titular {
+  font-family: var(--display);
+  font-weight: 350;
+  font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--texto);
+  max-width: 620px;
+}
+h2.titular.on-dark { color: var(--crema); }
+
+/* ── ANIMACIÓN DE TEXTO AL HACER SCROLL ── */
+/* Los h2.titular se dividen en palabras (ver script al final del body) que se
+   revelan con stagger cuando la sección entra en viewport — eco del efecto de
+   Anima ("We are your pa..." apareciendo progresivamente). Reutiliza el mismo
+   IntersectionObserver que ya movía .reveal, no es un sistema aparte.
+   Decisión 12 ago 2026. */
+h2.titular .palabra,
+.hero h1 .palabra {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1), transform 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+}
+h2.titular.visible .palabra,
+.hero h1.visible .palabra {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.lead {
+  font-family: var(--serif);
+  font-size: clamp(18px, 1.7vw, 20.5px);
+  color: var(--texto-suave);
+  line-height: 1.7;
+  max-width: 560px;
+  margin-top: 18px;
+}
+.lead.on-dark { color: rgba(237,228,211,0.82); }
+
+/* ── BOTONES ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--sans);
+  font-size: 13.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding: 15px 28px;
+  border-radius: 999px;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.btn-primario {
+  background: var(--verde-oscuro);
+  color: var(--crema);
+}
+.btn-primario:hover { background: var(--verde); }
+
+.btn-sobre-oscuro {
+  background: var(--crema);
+  color: var(--verde-oscuro);
+}
+.btn-sobre-oscuro:hover { background: #ffffff; }
+
+.btn-fantasma {
+  background: transparent;
+  color: var(--verde-oscuro);
+  border-color: var(--crema-oscuro);
+}
+.btn-fantasma:hover { border-color: var(--verde); background: var(--verde-tenue); }
+
+.btn-fantasma.on-dark {
+  color: var(--crema);
+  border-color: rgba(237,228,211,0.3);
+}
+.btn-fantasma.on-dark:hover { border-color: var(--crema); background: rgba(237,228,211,0.08); }
+
+/* ── NAV ── */
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 18px 24px;
+}
+
+.nav-pill {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: var(--crema);
+  border: 1px solid var(--crema-oscuro);
+  border-radius: 999px;
+  box-shadow: var(--sombra);
+  padding: 8px 10px 8px 26px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.nav-logo svg { height: 52px; width: auto; color: var(--verde-oscuro); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  font-family: var(--sans);
+  font-size: 13px;
+  letter-spacing: 0.2px;
+}
+.nav-links a {
+  text-decoration: none;
+  color: var(--texto-suave);
+  transition: color 0.15s ease;
+}
+.nav-links a:hover { color: var(--verde-oscuro); }
+
+.nav-cta { padding: 11px 20px; font-size: 12px; }
+
+/* ── HERO ── */
+/* Foto real de Rober: mar en calma, Orquilla (El Hierro). Origen: 05_fluye/brand/img/orchilla.jpg */
+.hero {
+  background: url('hero_orchilla.jpg');
+  background-size: cover;
+  background-position: center 40%;
+  /* Llena la pantalla restante bajo el nav (que mide ~105px en escritorio
+     tras pasar a píldora flotante el 12 ago con logo más grande; ver el
+     ajuste equivalente para el nav más bajo de móvil más abajo), centrado
+     verticalmente para que se vea foto arriba y abajo del texto. */
+  min-height: calc(100vh - 105px);
+  min-height: calc(100svh - 105px);
+  display: flex;
+  align-items: center;
+  padding: 48px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, rgba(15,28,25,0.82) 0%, rgba(15,28,25,0.58) 55%, rgba(15,28,25,0.42) 100%);
+  pointer-events: none;
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+}
+
+.hero h1 {
+  font-family: var(--display);
+  font-weight: 350;
+  font-size: clamp(44px, 8.6vw, 122px);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  color: var(--crema);
+  max-width: 100%;
+}
+
+.hero .lead {
+  max-width: 620px;
+}
+
+/* Pantallas muy bajas (ventana pequeña, portátil en una franja estrecha):
+   red de seguridad para que el texto nunca se apriete demasiado. */
+@media (max-height: 560px) {
+  .hero h1 { font-size: clamp(32px, 6vw, 56px); line-height: 1; }
+  .hero .lead { font-size: 15px; margin-top: 10px; }
+  .hero-botones { margin-top: 18px; }
+}
+
+.hero-botones {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 34px;
+}
+
+/* ── ETIQUETAS FLOTANTES TIPO FICHA TÉCNICA ── */
+/* Mismo patrón que anima.ai: en vez de una línea "eyebrow" pegada al titular,
+   dos etiquetas sueltas en monospace flotando sobre la foto. Reutilizan el
+   mismo texto que antes llevaba el eyebrow ("Agencia de automatización" /
+   "Las Palmas de Gran Canaria"), no es contenido nuevo. Decisión 12 ago 2026. */
+.ficha-tecnica {
+  position: absolute;
+  font-family: 'SF Mono', 'JetBrains Mono', Consolas, monospace;
+  font-size: 10.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(237,228,211,0.82);
+  border: 1px solid rgba(237,228,211,0.32);
+  border-radius: 4px;
+  padding: 8px 14px;
+  white-space: nowrap;
+  z-index: 2;
+}
+.ficha-1 { top: 7%; right: 6%; }
+.ficha-2 { bottom: 7%; right: 6%; }
+
+@media (max-width: 900px), (max-height: 560px) {
+  .ficha-tecnica { display: none; }
+}
+
+/* ── ANTES / DESPUÉS (visual del hero) ── */
+.bandeja {
+  background: var(--crema);
+  border-radius: 16px;
+  box-shadow: var(--sombra-alta);
+  max-width: 400px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.bandeja-panel { padding: 26px 28px; }
+
+.bandeja-antes { border-bottom: 1px solid var(--crema-oscuro); }
+
+.bandeja-momento {
+  font-family: var(--sans);
+  font-size: 10.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: var(--texto-suave);
+  opacity: 0.7;
+  margin-bottom: 10px;
+}
+
+.bandeja-cifra {
+  font-family: var(--serif);
+  font-size: 23px;
+  line-height: 1.3;
+  margin-bottom: 16px;
+}
+.bandeja-antes .bandeja-cifra { color: var(--texto-suave); }
+.bandeja-despues .bandeja-cifra { color: var(--verde); }
+
+.bandeja-lista {
+  display: flex;
+  flex-direction: column;
+}
+
+.bandeja-item {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--texto-suave);
+  line-height: 1.5;
+  padding: 9px 0;
+  border-top: 1px solid var(--crema-oscuro);
+}
+.bandeja-item:first-child { border-top: none; padding-top: 0; }
+
+.bandeja-mas {
+  font-family: var(--sans);
+  font-size: 11.5px;
+  color: var(--texto-suave);
+  opacity: 0.55;
+  padding-top: 8px;
+}
+
+.bandeja-despues .bandeja-item.resuelto { color: var(--verde); }
+.bandeja-despues .bandeja-item.pendiente { color: var(--texto); font-weight: 700; }
+
+/* ── SECCIONES ── */
+.seccion { padding: 120px 0; }
+.seccion-cerrada { padding: 120px 0 88px; }
+
+.seccion-oscura { background: var(--verde-oscuro); }
+.seccion-clara { background: var(--crema); }
+.seccion-elevada { background: var(--crema-oscuro); }
+
+/* ── PROBLEMA ── */
+.problema-texto {
+  font-family: var(--serif);
+  font-size: clamp(20px, 2.2vw, 25px);
+  line-height: 1.55;
+  color: var(--texto);
+  max-width: 720px;
+}
+
+/* ── PARA QUIÉN ── */
+.para-quien {
+  border-left: 3px solid var(--verde);
+  padding: 8px 0 8px 28px;
+}
+.para-quien p:not(.eyebrow) {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: var(--texto);
+  line-height: 1.6;
+  max-width: 640px;
+}
+
+/* ── CÓMO TRABAJAMOS ── */
+/* Foto real de Rober: cascada, Inagua (Gran Canaria). Origen: 05_fluye/brand/img/inagua_cascada.jpg.
+   Mismo tratamiento que el hero (foto a sangre completa + overlay oscuro) para romper el tramo
+   de secciones de solo texto — decisión 12 ago 2026 tras feedback de Rober de falta de dinamismo. */
+.fondo-cascada {
+  background: url('cascada_inagua.jpg');
+  background-size: cover;
+  background-position: center 65%;
+  position: relative;
+  overflow: hidden;
+}
+.fondo-cascada::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15,28,25,0.72) 0%, rgba(15,28,25,0.5) 55%, rgba(15,28,25,0.68) 100%);
+  pointer-events: none;
+}
+.fondo-cascada .wrap { position: relative; z-index: 1; }
+
+.pasos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 52px;
+  margin-top: 56px;
+}
+
+.paso-numero {
+  font-family: var(--serif);
+  font-size: 56px;
+  color: rgba(237,228,211,0.18);
+  line-height: 1;
+  margin-bottom: 14px;
+}
+
+.paso h3 {
+  font-family: var(--sans);
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.8px;
+  color: var(--crema);
+  margin-bottom: 10px;
+}
+
+.paso p {
+  font-family: var(--serif);
+  font-size: 15.5px;
+  color: rgba(237,228,211,0.8);
+  line-height: 1.65;
+  max-width: 280px;
+}
+
+/* ── CASO CONCRETO: TURISMO ── */
+/* Foto real: playa de Papagayo (Lanzarote) — panel lateral, no fondo a sangre completa,
+   porque esta sección ya tiene bastante contenido (chips + 4 funciones) y ponerle overlay
+   oscuro encima habría obligado a re-oscurecer cada elemento hijo. Decisión 12 ago 2026. */
+.turismo-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 56px;
+  align-items: start;
+}
+.turismo-foto {
+  background: url('playa_papagayo.jpg');
+  background-size: cover;
+  background-position: center;
+  aspect-ratio: 4 / 5;
+  border-radius: 20px;
+  box-shadow: var(--sombra-alta);
+}
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 20px 0 8px;
+}
+.chip {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--verde);
+  border: 1px solid var(--crema-oscuro);
+  border-radius: var(--radio);
+  padding: 6px 13px;
+}
+
+.funciones-lista {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 36px 48px;
+  margin-top: 44px;
+}
+
+.funcion-item { border-top: 1px solid var(--crema-oscuro); padding-top: 18px; }
+.funcion-item svg { width: 20px; height: 20px; color: var(--verde); margin-bottom: 12px; }
+
+.funcion-item h3 {
+  font-family: var(--sans);
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--texto);
+  margin-bottom: 6px;
+}
+.funcion-item p {
+  font-family: var(--serif);
+  font-size: 15px;
+  color: var(--texto-suave);
+  line-height: 1.6;
+}
+
+/* ── PRICING ── */
+.piloto-bloque {
+  background: var(--verde-oscuro);
+  border-radius: var(--radio);
+  padding: 30px 34px;
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+.piloto-texto h3 {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: rgba(237,228,211,0.6);
+  margin-bottom: 10px;
+}
+.piloto-texto p {
+  font-family: var(--serif);
+  font-size: 16px;
+  color: var(--crema);
+  line-height: 1.6;
+  max-width: 480px;
+}
+.piloto-precio {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--crema);
+  background: rgba(237,228,211,0.1);
+  border: 1px solid rgba(237,228,211,0.22);
+  border-radius: var(--radio);
+  padding: 12px 22px;
+  white-space: nowrap;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+.tier {
+  background: var(--blanco);
+  border-radius: var(--radio);
+  padding: 30px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: var(--sombra);
+}
+
+.tier.destacado {
+  background: var(--verde-oscuro);
+  position: relative;
+}
+
+.tier-badge {
+  font-family: var(--sans);
+  font-size: 9.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--verde-oscuro);
+  background: var(--crema);
+  padding: 5px 11px;
+  border-radius: 6px;
+  display: inline-block;
+  width: fit-content;
+  margin-bottom: 4px;
+}
+
+.tier-nombre {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--verde);
+}
+.tier.destacado .tier-nombre { color: rgba(237,228,211,0.6); }
+
+.tier-setup {
+  font-family: var(--serif);
+  font-size: 26px;
+  color: var(--texto);
+  margin-top: 6px;
+  line-height: 1;
+}
+.tier.destacado .tier-setup { color: var(--crema); }
+
+.tier-setup span {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: var(--texto-suave);
+}
+.tier.destacado .tier-setup span { color: rgba(237,228,211,0.68); }
+
+.tier-mensual {
+  font-family: var(--sans);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--verde);
+}
+.tier.destacado .tier-mensual { color: var(--crema); }
+
+.tier-para {
+  font-family: var(--serif);
+  font-size: 13.5px;
+  color: var(--texto-suave);
+  line-height: 1.55;
+  margin-top: 10px;
+  padding-top: 12px;
+  border-top: 1px solid var(--crema-oscuro);
+}
+.tier.destacado .tier-para {
+  color: rgba(237,228,211,0.72);
+  border-top-color: rgba(237,228,211,0.16);
+}
+
+.nota-api {
+  font-family: var(--sans);
+  font-size: 13px;
+  color: var(--texto-suave);
+  line-height: 1.6;
+  margin-top: 26px;
+  padding: 16px 20px;
+  background: var(--crema-oscuro);
+  border-radius: var(--radio);
+}
+
+/* ── B2B ── */
+.b2b-card {
+  border-left: 3px solid var(--verde);
+  padding: 8px 0 8px 28px;
+}
+.b2b-card p {
+  font-family: var(--serif);
+  font-size: 16.5px;
+  color: var(--texto-suave);
+  line-height: 1.75;
+  max-width: 660px;
+}
+.b2b-card p + p { margin-top: 14px; }
+
+/* Foto real: Timanfaya (Lanzarote). Mismo tratamiento que .fondo-cascada —
+   sección corta (solo eyebrow + card), admite fondo a sangre completa sin
+   tener que re-oscurecer media docena de elementos hijo. Decisión 12 ago 2026. */
+.fondo-timanfaya {
+  background: url('volcan_timanfaya.jpg');
+  background-size: cover;
+  background-position: center 60%;
+  position: relative;
+  overflow: hidden;
+}
+.fondo-timanfaya::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15,28,25,0.75) 0%, rgba(15,28,25,0.55) 55%, rgba(15,28,25,0.72) 100%);
+  pointer-events: none;
+}
+.fondo-timanfaya .wrap { position: relative; z-index: 1; }
+.fondo-timanfaya .b2b-card { border-left-color: var(--sol); }
+.fondo-timanfaya .b2b-card p { color: rgba(237,228,211,0.88); }
+
+/* ── QUIÉNES SOMOS ── */
+.quienes-grid {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 40px;
+  align-items: start;
+}
+.quienes-foto {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center 78%;
+  flex-shrink: 0;
+}
+.quienes-texto {
+  font-family: var(--serif);
+  font-size: 20px;
+  color: var(--texto);
+  line-height: 1.7;
+  max-width: 620px;
+}
+.quienes-texto strong { font-weight: normal; color: var(--verde); }
+.quienes-firma {
+  font-family: var(--sans);
+  font-size: 12.5px;
+  color: var(--verde);
+  margin-top: 14px;
+}
+
+@media (max-width: 640px) {
+  .quienes-grid { grid-template-columns: 1fr; }
+  .quienes-foto { width: 110px; height: 110px; }
+}
+
+/* ── RESPIRO VISUAL: FOTO A SANGRE COMPLETA ── */
+/* Foto real de Rober: pinar, Inagua (Gran Canaria). Origen: 05_fluye/brand/img/inagua_pinar.jpg.
+   Banda a sangre completa sin texto, entre "El problema" y "Para quién" — separada a propósito
+   de la sección "Cómo trabajamos" (que tiene su propia foto de fondo) para que no queden dos
+   fotos pegadas. Decisión 12 ago 2026 tras feedback de Rober ("queda raro justo encima de la
+   otra foto"); mismo recurso que se probó una vez con el_fronton_ola.jpg (aquella vez se retiró
+   por la foto/posición en concreto, no por la técnica). */
+.franja-foto {
+  height: clamp(180px, 26vw, 320px);
+  background: url('pinar_inagua.jpg');
+  background-size: cover;
+  background-position: center 55%;
+}
+
+/* ── CTA FINAL ── */
+/* Atardecer en Garajonay (La Gomera): eco visual del hero, mismo mar/luz de Canarias */
+.cta-final {
+  background-image: linear-gradient(0deg, rgba(15,28,25,0.88) 0%, rgba(15,28,25,0.72) 100%), url('atardecer_garajonay.jpg');
+  background-size: cover;
+  background-position: center;
+  text-align: center;
+}
+.cta-final-inner { max-width: 600px; margin: 0 auto; }
+
+.cta-final h2 {
+  font-family: var(--display);
+  font-weight: 350;
+  font-size: clamp(28px, 3.8vw, 40px);
+  color: var(--crema);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 18px;
+}
+
+.cta-final p {
+  font-family: var(--serif);
+  font-size: 17px;
+  color: rgba(237,228,211,0.8);
+  line-height: 1.7;
+  margin-bottom: 36px;
+}
+
+.cta-botones {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ── FOOTER ── */
+footer {
+  background: var(--verde-oscuro);
+  border-top: 1px solid rgba(237,228,211,0.1);
+  padding: 30px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.footer-marca { display: flex; align-items: center; gap: 12px; }
+.footer-logo svg { height: 26px; width: auto; color: var(--crema); }
+.footer-marca span {
+  font-family: var(--sans);
+  font-size: 12.5px;
+  color: rgba(237,228,211,0.68);
+}
+
+.footer-texto {
+  font-family: var(--sans);
+  font-size: 12px;
+  color: rgba(237,228,211,0.68);
+  text-align: right;
+  line-height: 1.7;
+}
+.footer-texto a { text-decoration: none; border-bottom: 1px solid rgba(237,228,211,0.25); }
+.footer-texto a:hover { border-color: rgba(237,228,211,0.6); }
+
+.icono { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .funciones-lista { grid-template-columns: 1fr; }
+  .pasos-grid { grid-template-columns: 1fr; gap: 36px; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .turismo-grid { grid-template-columns: 1fr; }
+  .turismo-foto { aspect-ratio: 16 / 10; order: -1; }
+}
+
+@media (max-width: 760px) {
+  .nav-links { display: none; }
+}
+
+@media (max-width: 640px) {
+  nav { padding: 14px 16px; }
+  .nav-pill { padding: 6px 8px 6px 18px; }
+  .nav-logo svg { height: 38px; }
+  .wrap { padding: 0 20px; }
+  .hero { padding: 40px 0; min-height: calc(100vh - 85px); min-height: calc(100svh - 85px); }
+  .seccion, .seccion-cerrada { padding: 72px 0; }
+  .piloto-bloque { flex-direction: column; align-items: flex-start; }
+  footer { flex-direction: column; text-align: center; }
+  .footer-texto { text-align: center; }
+  .cta-botones { flex-direction: column; align-items: stretch; }
+  .cta-botones .btn { justify-content: center; }
+  .bandeja { max-width: 100%; }
+}
+
+/* ══ AÑADIDO 1 oct 2026: paso a varias páginas (portada abierta + /logistica/ /agencias/ /turismo/) ══ */
+
+/* Hero por página: misma estructura, otra foto de Rober */
+.hero-logistica { background-image: url('carretera_timanfaya.jpg'); background-position: center 70%; }
+.hero-agencias { background-image: url('volcan_timanfaya.jpg'); background-position: center 60%; }
+.hero-turismo { background-image: url('playa_papagayo.jpg'); background-position: center 55%; }
+.hero-logistica, .hero-agencias, .hero-turismo { background-size: cover; }
+/* Titulares de hero más largos en subpáginas: escala algo menor */
+.hero-sub h1 { font-size: clamp(40px, 6.6vw, 92px); }
+
+.nav-logo { text-decoration: none; color: inherit; }
+.nav-links a[aria-current="page"] { color: var(--verde-oscuro); border-bottom: 1px solid var(--verde); }
+
+/* ── ANTES / DESPUÉS (portada) ── filas tipográficas, sin tarjetas */
+.antes-despues { margin-top: 48px; max-width: 900px; }
+.ad-fila {
+  display: grid;
+  grid-template-columns: 1fr 28px 1fr;
+  gap: 18px;
+  align-items: baseline;
+  padding: 18px 0;
+  border-top: 1px solid var(--crema-oscuro);
+}
+.ad-fila:last-child { border-bottom: 1px solid var(--crema-oscuro); }
+.ad-antes { font-family: var(--serif); font-size: 17px; color: var(--texto-suave); }
+.ad-flecha { font-family: var(--sans); color: var(--sol); text-align: center; }
+.ad-despues { font-family: var(--serif); font-size: 17px; color: var(--verde-oscuro); }
+.ad-cabecera .ad-antes, .ad-cabecera .ad-despues {
+  font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--verde);
+}
+
+/* ── TRES CAMINOS (portada) ── lista numerada, no tarjetas */
+.caminos { margin-top: 48px; }
+.camino {
+  display: grid;
+  grid-template-columns: 90px 1fr auto;
+  gap: 28px;
+  align-items: baseline;
+  padding: 30px 0;
+  border-top: 1px solid rgba(36,31,24,0.16);
+}
+.camino:last-child { border-bottom: 1px solid rgba(36,31,24,0.16); }
+.camino-num { font-family: var(--serif); font-size: 44px; line-height: 1; color: var(--sol); }
+.camino h3 {
+  font-family: var(--display); font-weight: 350; font-size: clamp(22px, 2.4vw, 28px);
+  letter-spacing: -0.01em; color: var(--texto); margin-bottom: 8px;
+}
+.camino p { font-family: var(--serif); font-size: 16.5px; color: var(--texto-suave); line-height: 1.65; max-width: 560px; }
+.camino-enlace {
+  font-family: var(--sans); font-size: 12.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+  color: var(--verde-oscuro); text-decoration: none; white-space: nowrap;
+  border-bottom: 1px solid var(--verde); padding-bottom: 3px;
+}
+.camino-enlace:hover { color: var(--verde); }
+
+/* ── FILAS DE DOS COLUMNAS (agencias: modalidades) ── */
+.modalidades { margin-top: 40px; max-width: 860px; }
+.modalidad {
+  display: grid; grid-template-columns: 220px 1fr; gap: 28px;
+  padding: 22px 0; border-top: 1px solid var(--crema-oscuro);
+}
+.modalidad:last-child { border-bottom: 1px solid var(--crema-oscuro); }
+.modalidad h3 { font-family: var(--sans); font-size: 13px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--verde-oscuro); }
+.modalidad p { font-family: var(--serif); font-size: 17px; color: var(--texto-suave); line-height: 1.65; }
+
+/* ── PREGUNTAS FRECUENTES ── */
+.faq { margin-top: 40px; max-width: 760px; }
+.faq details { border-top: 1px solid var(--crema-oscuro); padding: 20px 0; }
+.faq details:last-child { border-bottom: 1px solid var(--crema-oscuro); }
+.faq summary {
+  font-family: var(--serif); font-size: 19px; color: var(--texto); cursor: pointer;
+  list-style: none; display: flex; justify-content: space-between; gap: 20px;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after { content: '+'; font-family: var(--sans); color: var(--sol); flex-shrink: 0; }
+.faq details[open] summary::after { content: '\2212'; }
+.faq details p { font-family: var(--serif); font-size: 16.5px; color: var(--texto-suave); line-height: 1.7; margin-top: 12px; max-width: 680px; }
+
+.texto-medio { font-family: var(--serif); font-size: clamp(19px, 2vw, 22px); line-height: 1.6; color: var(--texto); max-width: 700px; }
+
+.footer-enlaces a { text-decoration: none; border-bottom: 1px solid rgba(237,228,211,0.25); }
+.footer-enlaces { margin-bottom: 4px; }
+
+@media (max-width: 760px) {
+  .ad-fila { grid-template-columns: 1fr; gap: 4px; }
+  .ad-flecha { display: none; }
+  .ad-cabecera { display: none; }
+  .ad-despues::before { content: '\2192  '; color: var(--sol); }
+  .camino { grid-template-columns: 1fr; gap: 10px; }
+  .camino-num { font-size: 32px; }
+  .modalidad { grid-template-columns: 1fr; gap: 8px; }
+}
