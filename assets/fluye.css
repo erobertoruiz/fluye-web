@@ -929,3 +929,10 @@ footer {
   .camino-num { font-size: 32px; }
   .modalidad { grid-template-columns: 1fr; gap: 8px; }
 }
+
+/* 7 nov 2026: /logistica/ pasa a tres funciones (se retira «Cargos que nadie
+   revisó»); en escritorio, tres columnas para no dejar un hueco. */
+.funciones-lista.tres { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) {
+  .funciones-lista.tres { grid-template-columns: 1fr; }
+}
