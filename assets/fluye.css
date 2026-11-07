@@ -310,31 +310,6 @@ nav {
   margin-top: 34px;
 }
 
-/* ── ETIQUETAS FLOTANTES TIPO FICHA TÉCNICA ── */
-/* Mismo patrón que anima.ai: en vez de una línea "eyebrow" pegada al titular,
-   dos etiquetas sueltas en monospace flotando sobre la foto. Reutilizan el
-   mismo texto que antes llevaba el eyebrow ("Agencia de automatización" /
-   "Las Palmas de Gran Canaria"), no es contenido nuevo. Decisión 12 ago 2026. */
-.ficha-tecnica {
-  position: absolute;
-  font-family: 'SF Mono', 'JetBrains Mono', Consolas, monospace;
-  font-size: 10.5px;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: rgba(237,228,211,0.82);
-  border: 1px solid rgba(237,228,211,0.32);
-  border-radius: 4px;
-  padding: 8px 14px;
-  white-space: nowrap;
-  z-index: 2;
-}
-.ficha-1 { top: 7%; right: 6%; }
-.ficha-2 { bottom: 7%; right: 6%; }
-
-@media (max-width: 900px), (max-height: 560px) {
-  .ficha-tecnica { display: none; }
-}
-
 /* ── ANTES / DESPUÉS (visual del hero) ── */
 .bandeja {
   background: var(--crema);
@@ -728,13 +703,6 @@ nav {
   max-width: 620px;
 }
 .quienes-texto strong { font-weight: normal; color: var(--verde); }
-.quienes-firma {
-  font-family: var(--sans);
-  font-size: 12.5px;
-  color: var(--verde);
-  margin-top: 14px;
-}
-
 @media (max-width: 640px) {
   .quienes-grid { grid-template-columns: 1fr; }
   .quienes-foto { width: 110px; height: 110px; }
@@ -883,22 +851,17 @@ footer {
 .ad-antes { font-family: var(--serif); font-size: 17px; color: var(--texto-suave); }
 .ad-flecha { font-family: var(--sans); color: var(--sol); text-align: center; }
 .ad-despues { font-family: var(--serif); font-size: 17px; color: var(--verde-oscuro); }
-.ad-cabecera .ad-antes, .ad-cabecera .ad-despues {
-  font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--verde);
-}
-
 /* ── TRES CAMINOS (portada) ── lista numerada, no tarjetas */
 .caminos { margin-top: 48px; }
 .camino {
   display: grid;
-  grid-template-columns: 90px 1fr auto;
+  grid-template-columns: 1fr auto;
   gap: 28px;
   align-items: baseline;
   padding: 30px 0;
   border-top: 1px solid rgba(36,31,24,0.16);
 }
 .camino:last-child { border-bottom: 1px solid rgba(36,31,24,0.16); }
-.camino-num { font-family: var(--serif); font-size: 44px; line-height: 1; color: var(--sol); }
 .camino h3 {
   font-family: var(--display); font-weight: 350; font-size: clamp(22px, 2.4vw, 28px);
   letter-spacing: -0.01em; color: var(--texto); margin-bottom: 8px;
@@ -936,16 +899,12 @@ footer {
 
 .texto-medio { font-family: var(--serif); font-size: clamp(19px, 2vw, 22px); line-height: 1.6; color: var(--texto); max-width: 700px; }
 
-.footer-enlaces a { text-decoration: none; border-bottom: 1px solid rgba(237,228,211,0.25); }
-.footer-enlaces { margin-bottom: 4px; }
 
 @media (max-width: 760px) {
   .ad-fila { grid-template-columns: 1fr; gap: 4px; }
   .ad-flecha { display: none; }
-  .ad-cabecera { display: none; }
   .ad-despues::before { content: '\2192  '; color: var(--sol); }
   .camino { grid-template-columns: 1fr; gap: 10px; }
-  .camino-num { font-size: 32px; }
   .modalidad { grid-template-columns: 1fr; gap: 8px; }
 }
 
