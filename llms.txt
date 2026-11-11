@@ -7,7 +7,7 @@ Fluye está dirigido por Rober, su fundador, con 20 años de experiencia en sist
 ## Páginas
 
 - [Inicio](https://fluye.pro/): las dos formas de trabajar con Fluye, como socio técnico de agencias o automatizando procesos de empresas de Canarias.
-- [Agencias](https://fluye.pro/agencias/): partner técnico de agencias digitales y creativas de toda España, en remoto. Medición (GA4, Google Tag Manager, conversiones), SEO técnico y visibilidad en IA, y automatizaciones e IA para los clientes de la agencia, en marca blanca o como socio. La agencia mantiene al cliente y factura. Caso en producción: recordatorios automáticos de evento para una compañía de espectáculos itinerante, a través de una agencia partner.
+- [Agencias](https://fluye.pro/agencias/): socio técnico de agencias digitales y creativas de toda España, en remoto. Medición (GA4, Google Tag Manager, conversiones), SEO técnico y visibilidad en IA, y automatizaciones e IA para los clientes de la agencia, en marca blanca o como socio. La agencia mantiene al cliente y factura. Caso en producción: recordatorios automáticos de evento para una compañía de espectáculos itinerante, a través de una agencia digital con la que colabora.
 - [Logística](https://fluye.pro/logistica/): automatización para empresas de logística, importadores y distribuidores en Las Palmas de Gran Canaria. Lectura de pedidos que llegan por correo o PDF, cruce de facturas de proveedores con pedido y recepción y seguimiento de proveedores e incidencias. Sin cambiar de ERP. Fluye está empezando en este sector: no tiene clientes de referencia en logística publicados.
 
 ## Precios
