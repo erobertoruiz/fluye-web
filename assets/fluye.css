@@ -22,8 +22,6 @@
 :root {
   --verde: #3D6B62;
   --verde-oscuro: #1E3630;
-  --verde-suave: #6B9186;
-  --verde-tenue: #E6EDE8;
   --crema: #EDE4D3;
   --crema-oscuro: #DDCFB4;
   --blanco: #FFFFFF;
@@ -31,11 +29,15 @@
   --texto-suave: #55493C;
   --sol: #B97A52;
   --sombra: 0 2px 6px rgba(30,54,48,0.06);
-  --sombra-alta: 0 14px 32px rgba(30,54,48,0.14);
   --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, 'Times New Roman', serif;
   --sans: -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --display: 'Unbounded', var(--sans);
   --radio: 10px;
+  --radio-pildora: 999px; /* solo el menú */
+  /* Colores base para transparencias: rgba(var(--crema-rgb), 0.8) */
+  --crema-rgb: 237, 228, 211;
+  --tinta-rgb: 15, 28, 25;
+  --texto-rgb: 36, 31, 24;
 }
 
 html { scroll-behavior: smooth; }
@@ -51,14 +53,6 @@ body {
 img, svg { display: block; max-width: 100%; }
 a { color: inherit; }
 
-.visually-hidden {
-  position: absolute;
-  width: 1px; height: 1px;
-  overflow: hidden;
-  clip: rect(0 0 0 0);
-  white-space: nowrap;
-}
-
 .skip-link {
   position: absolute;
   top: -48px;
@@ -68,16 +62,20 @@ a { color: inherit; }
   font-family: var(--sans);
   font-size: 13px;
   padding: 10px 16px;
-  border-radius: 8px;
+  border-radius: var(--radio);
   z-index: 999;
   transition: top 0.2s;
 }
 .skip-link:focus { top: 12px; }
 
 :focus-visible {
-  outline: 2px solid var(--verde-suave);
+  outline: 2px solid var(--verde-oscuro);
   outline-offset: 3px;
 }
+/* Sobre foto o fondo oscuro, el contorno pasa a crema. */
+.hero :focus-visible,
+.seccion-oscura :focus-visible,
+footer :focus-visible { outline-color: var(--crema); }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -113,7 +111,7 @@ a { color: inherit; }
   flex-shrink: 0;
   background: linear-gradient(90deg, var(--sol), var(--verde));
 }
-.eyebrow.on-dark { color: rgba(237,228,211,0.72); }
+.eyebrow.on-dark { color: rgba(var(--crema-rgb), 0.72); }
 .eyebrow.on-dark::before { background: linear-gradient(90deg, var(--sol), var(--crema)); opacity: 0.85; }
 
 .wrap {
@@ -136,11 +134,9 @@ h2.titular {
 h2.titular.on-dark { color: var(--crema); }
 
 /* ── ANIMACIÓN DE TEXTO AL HACER SCROLL ── */
-/* Los h2.titular se dividen en palabras (ver script al final del body) que se
-   revelan con stagger cuando la sección entra en viewport — eco del efecto de
-   Anima ("We are your pa..." apareciendo progresivamente). Reutiliza el mismo
-   IntersectionObserver que ya movía .reveal, no es un sistema aparte.
-   Decisión 12 ago 2026. */
+/* Los h2.titular se dividen en palabras (assets/fluye.js) que se
+   revelan una a una cuando la sección entra en pantalla. Usa el mismo
+   IntersectionObserver que .reveal (assets/fluye.js). */
 h2.titular .palabra,
 .hero h1 .palabra {
   display: inline-block;
@@ -162,7 +158,7 @@ h2.titular.visible .palabra,
   max-width: 560px;
   margin-top: 18px;
 }
-.lead.on-dark { color: rgba(237,228,211,0.82); }
+.lead.on-dark { color: rgba(var(--crema-rgb), 0.82); }
 
 /* ── BOTONES ── */
 .btn {
@@ -175,7 +171,7 @@ h2.titular.visible .palabra,
   text-transform: uppercase;
   letter-spacing: 1.2px;
   padding: 15px 28px;
-  border-radius: 999px;
+  border-radius: var(--radio);
   text-decoration: none;
   border: 1px solid transparent;
   transition: background 0.15s ease, border-color 0.15s ease;
@@ -193,20 +189,7 @@ h2.titular.visible .palabra,
   background: var(--crema);
   color: var(--verde-oscuro);
 }
-.btn-sobre-oscuro:hover { background: #ffffff; }
-
-.btn-fantasma {
-  background: transparent;
-  color: var(--verde-oscuro);
-  border-color: var(--crema-oscuro);
-}
-.btn-fantasma:hover { border-color: var(--verde); background: var(--verde-tenue); }
-
-.btn-fantasma.on-dark {
-  color: var(--crema);
-  border-color: rgba(237,228,211,0.3);
-}
-.btn-fantasma.on-dark:hover { border-color: var(--crema); background: rgba(237,228,211,0.08); }
+.btn-sobre-oscuro:hover { background: var(--blanco); }
 
 /* ── NAV ── */
 nav {
@@ -221,7 +204,7 @@ nav {
   margin: 0 auto;
   background: var(--crema);
   border: 1px solid var(--crema-oscuro);
-  border-radius: 999px;
+  border-radius: var(--radio-pildora);
   box-shadow: var(--sombra);
   padding: 8px 10px 8px 26px;
   display: flex;
@@ -249,7 +232,7 @@ nav {
 
 
 /* ── HERO ── */
-/* Foto real de Rober: mar en calma, Orquilla (El Hierro). Origen: 05_fluye/brand/img/orchilla.jpg */
+/* Foto real de Rober: mar en calma, Orquilla (El Hierro). Origen: fluye/marca/img/ (repo clau): orchilla.jpg */
 .hero {
   background: url('hero_orchilla.jpg');
   background-size: cover;
@@ -271,7 +254,7 @@ nav {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(15,28,25,0.82) 0%, rgba(15,28,25,0.58) 55%, rgba(15,28,25,0.42) 100%);
+  background: linear-gradient(0deg, rgba(var(--tinta-rgb), 0.82) 0%, rgba(var(--tinta-rgb), 0.58) 55%, rgba(var(--tinta-rgb), 0.42) 100%);
   pointer-events: none;
 }
 
@@ -310,66 +293,6 @@ nav {
   margin-top: 34px;
 }
 
-/* ── ANTES / DESPUÉS (visual del hero) ── */
-.bandeja {
-  background: var(--crema);
-  border-radius: 16px;
-  box-shadow: var(--sombra-alta);
-  max-width: 400px;
-  margin: 0 auto;
-  overflow: hidden;
-}
-
-.bandeja-panel { padding: 26px 28px; }
-
-.bandeja-antes { border-bottom: 1px solid var(--crema-oscuro); }
-
-.bandeja-momento {
-  font-family: var(--sans);
-  font-size: 10.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.8px;
-  color: var(--texto-suave);
-  opacity: 0.7;
-  margin-bottom: 10px;
-}
-
-.bandeja-cifra {
-  font-family: var(--serif);
-  font-size: 23px;
-  line-height: 1.3;
-  margin-bottom: 16px;
-}
-.bandeja-antes .bandeja-cifra { color: var(--texto-suave); }
-.bandeja-despues .bandeja-cifra { color: var(--verde); }
-
-.bandeja-lista {
-  display: flex;
-  flex-direction: column;
-}
-
-.bandeja-item {
-  font-family: var(--sans);
-  font-size: 13px;
-  color: var(--texto-suave);
-  line-height: 1.5;
-  padding: 9px 0;
-  border-top: 1px solid var(--crema-oscuro);
-}
-.bandeja-item:first-child { border-top: none; padding-top: 0; }
-
-.bandeja-mas {
-  font-family: var(--sans);
-  font-size: 11.5px;
-  color: var(--texto-suave);
-  opacity: 0.55;
-  padding-top: 8px;
-}
-
-.bandeja-despues .bandeja-item.resuelto { color: var(--verde); }
-.bandeja-despues .bandeja-item.pendiente { color: var(--texto); font-weight: 700; }
-
 /* ── SECCIONES ── */
 .seccion { padding: 120px 0; }
 .seccion-cerrada { padding: 120px 0 88px; }
@@ -401,7 +324,7 @@ nav {
 }
 
 /* ── CÓMO TRABAJAMOS ── */
-/* Foto real de Rober: cascada, Inagua (Gran Canaria). Origen: 05_fluye/brand/img/inagua_cascada.jpg.
+/* Foto real de Rober: cascada, Inagua (Gran Canaria). Origen: fluye/marca/img/ (repo clau): inagua_cascada.jpg.
    Mismo tratamiento que el hero (foto a sangre completa + overlay oscuro) para romper el tramo
    de secciones de solo texto — decisión 12 ago 2026 tras feedback de Rober de falta de dinamismo. */
 .fondo-cascada {
@@ -415,7 +338,7 @@ nav {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(15,28,25,0.72) 0%, rgba(15,28,25,0.5) 55%, rgba(15,28,25,0.68) 100%);
+  background: linear-gradient(180deg, rgba(var(--tinta-rgb), 0.74) 0%, rgba(var(--tinta-rgb), 0.7) 55%, rgba(var(--tinta-rgb), 0.72) 100%);
   pointer-events: none;
 }
 .fondo-cascada .wrap { position: relative; z-index: 1; }
@@ -430,7 +353,7 @@ nav {
 .paso-numero {
   font-family: var(--serif);
   font-size: 56px;
-  color: rgba(237,228,211,0.18);
+  color: rgba(var(--crema-rgb), 0.18);
   line-height: 1;
   margin-bottom: 14px;
 }
@@ -448,29 +371,12 @@ nav {
 .paso p {
   font-family: var(--serif);
   font-size: 15.5px;
-  color: rgba(237,228,211,0.8);
+  color: rgba(var(--crema-rgb), 0.8);
   line-height: 1.65;
   max-width: 280px;
 }
 
-/* ── CASO CONCRETO: TURISMO ── */
-/* Foto real: playa de Papagayo (Lanzarote) — panel lateral, no fondo a sangre completa,
-   porque esta sección ya tiene bastante contenido (chips + 4 funciones) y ponerle overlay
-   oscuro encima habría obligado a re-oscurecer cada elemento hijo. Decisión 12 ago 2026. */
-.turismo-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 56px;
-  align-items: start;
-}
-.turismo-foto {
-  background: url('playa_papagayo.jpg');
-  background-size: cover;
-  background-position: center;
-  aspect-ratio: 4 / 5;
-  border-radius: 20px;
-  box-shadow: var(--sombra-alta);
-}
+/* ── ETIQUETAS (solo /turismo/) ── */
 .chips {
   display: flex;
   flex-wrap: wrap;
@@ -494,7 +400,6 @@ nav {
 }
 
 .funcion-item { border-top: 1px solid var(--crema-oscuro); padding-top: 18px; }
-.funcion-item svg { width: 20px; height: 20px; color: var(--verde); margin-bottom: 12px; }
 
 .funcion-item h3 {
   font-family: var(--sans);
@@ -508,141 +413,6 @@ nav {
   font-size: 15px;
   color: var(--texto-suave);
   line-height: 1.6;
-}
-
-/* ── PRICING ── */
-.piloto-bloque {
-  background: var(--verde-oscuro);
-  border-radius: var(--radio);
-  padding: 30px 34px;
-  margin-bottom: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-.piloto-texto h3 {
-  font-family: var(--sans);
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: rgba(237,228,211,0.6);
-  margin-bottom: 10px;
-}
-.piloto-texto p {
-  font-family: var(--serif);
-  font-size: 16px;
-  color: var(--crema);
-  line-height: 1.6;
-  max-width: 480px;
-}
-.piloto-precio {
-  font-family: var(--sans);
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--crema);
-  background: rgba(237,228,211,0.1);
-  border: 1px solid rgba(237,228,211,0.22);
-  border-radius: var(--radio);
-  padding: 12px 22px;
-  white-space: nowrap;
-}
-
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
-}
-
-.tier {
-  background: var(--blanco);
-  border-radius: var(--radio);
-  padding: 30px 26px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  box-shadow: var(--sombra);
-}
-
-.tier.destacado {
-  background: var(--verde-oscuro);
-  position: relative;
-}
-
-.tier-badge {
-  font-family: var(--sans);
-  font-size: 9.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: var(--verde-oscuro);
-  background: var(--crema);
-  padding: 5px 11px;
-  border-radius: 6px;
-  display: inline-block;
-  width: fit-content;
-  margin-bottom: 4px;
-}
-
-.tier-nombre {
-  font-family: var(--sans);
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  color: var(--verde);
-}
-.tier.destacado .tier-nombre { color: rgba(237,228,211,0.6); }
-
-.tier-setup {
-  font-family: var(--serif);
-  font-size: 26px;
-  color: var(--texto);
-  margin-top: 6px;
-  line-height: 1;
-}
-.tier.destacado .tier-setup { color: var(--crema); }
-
-.tier-setup span {
-  font-family: var(--sans);
-  font-size: 12px;
-  color: var(--texto-suave);
-}
-.tier.destacado .tier-setup span { color: rgba(237,228,211,0.68); }
-
-.tier-mensual {
-  font-family: var(--sans);
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--verde);
-}
-.tier.destacado .tier-mensual { color: var(--crema); }
-
-.tier-para {
-  font-family: var(--serif);
-  font-size: 13.5px;
-  color: var(--texto-suave);
-  line-height: 1.55;
-  margin-top: 10px;
-  padding-top: 12px;
-  border-top: 1px solid var(--crema-oscuro);
-}
-.tier.destacado .tier-para {
-  color: rgba(237,228,211,0.72);
-  border-top-color: rgba(237,228,211,0.16);
-}
-
-.nota-api {
-  font-family: var(--sans);
-  font-size: 13px;
-  color: var(--texto-suave);
-  line-height: 1.6;
-  margin-top: 26px;
-  padding: 16px 20px;
-  background: var(--crema-oscuro);
-  border-radius: var(--radio);
 }
 
 /* ── B2B ── */
@@ -673,12 +443,12 @@ nav {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(15,28,25,0.75) 0%, rgba(15,28,25,0.55) 55%, rgba(15,28,25,0.72) 100%);
+  background: linear-gradient(180deg, rgba(var(--tinta-rgb), 0.75) 0%, rgba(var(--tinta-rgb), 0.55) 55%, rgba(var(--tinta-rgb), 0.72) 100%);
   pointer-events: none;
 }
 .fondo-timanfaya .wrap { position: relative; z-index: 1; }
 .fondo-timanfaya .b2b-card { border-left-color: var(--sol); }
-.fondo-timanfaya .b2b-card p { color: rgba(237,228,211,0.88); }
+.fondo-timanfaya .b2b-card p { color: rgba(var(--crema-rgb), 0.88); }
 
 /* ── QUIÉNES SOMOS ── */
 .quienes-grid {
@@ -709,7 +479,7 @@ nav {
 }
 
 /* ── RESPIRO VISUAL: FOTO A SANGRE COMPLETA ── */
-/* Foto real de Rober: pinar, Inagua (Gran Canaria). Origen: 05_fluye/brand/img/inagua_pinar.jpg.
+/* Foto real de Rober: pinar, Inagua (Gran Canaria). Origen: fluye/marca/img/ (repo clau): inagua_pinar.jpg.
    Banda a sangre completa sin texto, entre "El problema" y "Para quién" — separada a propósito
    de la sección "Cómo trabajamos" (que tiene su propia foto de fondo) para que no queden dos
    fotos pegadas. Decisión 12 ago 2026 tras feedback de Rober ("queda raro justo encima de la
@@ -725,7 +495,7 @@ nav {
 /* ── CTA FINAL ── */
 /* Atardecer en Garajonay (La Gomera): eco visual del hero, mismo mar/luz de Canarias */
 .cta-final {
-  background-image: linear-gradient(0deg, rgba(15,28,25,0.88) 0%, rgba(15,28,25,0.72) 100%), url('atardecer_garajonay.jpg');
+  background-image: linear-gradient(0deg, rgba(var(--tinta-rgb), 0.88) 0%, rgba(var(--tinta-rgb), 0.72) 100%), url('atardecer_garajonay.jpg');
   background-size: cover;
   background-position: center;
   text-align: center;
@@ -745,7 +515,7 @@ nav {
 .cta-final p {
   font-family: var(--serif);
   font-size: 17px;
-  color: rgba(237,228,211,0.8);
+  color: rgba(var(--crema-rgb), 0.8);
   line-height: 1.7;
   margin-bottom: 36px;
 }
@@ -760,7 +530,7 @@ nav {
 /* ── FOOTER ── */
 footer {
   background: var(--verde-oscuro);
-  border-top: 1px solid rgba(237,228,211,0.1);
+  border-top: 1px solid rgba(var(--crema-rgb), 0.1);
   padding: 30px 32px;
   display: flex;
   align-items: center;
@@ -771,31 +541,21 @@ footer {
 
 .footer-marca { display: flex; align-items: center; gap: 12px; }
 .footer-logo svg { height: 26px; width: auto; color: var(--crema); }
-.footer-marca span {
-  font-family: var(--sans);
-  font-size: 12.5px;
-  color: rgba(237,228,211,0.68);
-}
 
 .footer-texto {
   font-family: var(--sans);
   font-size: 12px;
-  color: rgba(237,228,211,0.68);
+  color: rgba(var(--crema-rgb), 0.68);
   text-align: right;
   line-height: 1.7;
 }
-.footer-texto a { text-decoration: none; border-bottom: 1px solid rgba(237,228,211,0.25); }
-.footer-texto a:hover { border-color: rgba(237,228,211,0.6); }
-
-.icono { fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.footer-texto a { text-decoration: none; border-bottom: 1px solid rgba(var(--crema-rgb), 0.25); }
+.footer-texto a:hover { border-color: rgba(var(--crema-rgb), 0.6); }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 900px) {
   .funciones-lista { grid-template-columns: 1fr; }
   .pasos-grid { grid-template-columns: 1fr; gap: 36px; }
-  .pricing-grid { grid-template-columns: 1fr; }
-  .turismo-grid { grid-template-columns: 1fr; }
-  .turismo-foto { aspect-ratio: 16 / 10; order: -1; }
 }
 
 /* 1 oct 2026: sin botón CTA en el nav (duplicaba el del hero); los enlaces a
@@ -816,12 +576,10 @@ footer {
   .wrap { padding: 0 20px; }
   .hero { padding: 40px 0; min-height: calc(100vh - 85px); min-height: calc(100svh - 85px); }
   .seccion, .seccion-cerrada { padding: 72px 0; }
-  .piloto-bloque { flex-direction: column; align-items: flex-start; }
   footer { flex-direction: column; text-align: center; }
   .footer-texto { text-align: center; }
   .cta-botones { flex-direction: column; align-items: stretch; }
   .cta-botones .btn { justify-content: center; }
-  .bandeja { max-width: 100%; }
 }
 
 /* ══ AÑADIDO 1 oct 2026: paso a varias páginas (portada abierta + /logistica/ /agencias/ /turismo/) ══ */
@@ -835,6 +593,18 @@ footer {
 .hero-sub h1 { font-size: clamp(40px, 6.6vw, 92px); }
 
 .nav-logo { text-decoration: none; color: inherit; }
+
+/* ── ZONAS TÁCTILES ── */
+/* Enlaces pequeños: el área pulsable llega a 44 px de alto sin mover nada. */
+.nav-logo, .nav-links a, .camino-enlace, .footer-texto a { position: relative; }
+.nav-logo::after, .nav-links a::after, .camino-enlace::after, .footer-texto a::after {
+  content: '';
+  position: absolute;
+  left: -6px; right: -6px; top: 50%;
+  height: 44px;
+  transform: translateY(-50%);
+}
+
 .nav-links a[aria-current="page"] { color: var(--verde-oscuro); border-bottom: 1px solid var(--verde); }
 
 /* ── ANTES / DESPUÉS (portada) ── filas tipográficas, sin tarjetas */
@@ -851,7 +621,7 @@ footer {
 .ad-antes { font-family: var(--serif); font-size: 17px; color: var(--texto-suave); }
 .ad-flecha { font-family: var(--sans); color: var(--sol); text-align: center; }
 .ad-despues { font-family: var(--serif); font-size: 17px; color: var(--verde-oscuro); }
-/* ── TRES CAMINOS (portada) ── lista numerada, no tarjetas */
+/* ── DOS CAMINOS (portada) ── filas, no tarjetas */
 .caminos { margin-top: 48px; }
 .camino {
   display: grid;
@@ -859,9 +629,9 @@ footer {
   gap: 28px;
   align-items: baseline;
   padding: 30px 0;
-  border-top: 1px solid rgba(36,31,24,0.16);
+  border-top: 1px solid rgba(var(--texto-rgb), 0.16);
 }
-.camino:last-child { border-bottom: 1px solid rgba(36,31,24,0.16); }
+.camino:last-child { border-bottom: 1px solid rgba(var(--texto-rgb), 0.16); }
 .camino h3 {
   font-family: var(--display); font-weight: 350; font-size: clamp(22px, 2.4vw, 28px);
   letter-spacing: -0.01em; color: var(--texto); margin-bottom: 8px;
@@ -886,19 +656,17 @@ footer {
 
 /* ── PREGUNTAS FRECUENTES ── */
 .faq { margin-top: 40px; max-width: 760px; }
-.faq details { border-top: 1px solid var(--crema-oscuro); padding: 20px 0; }
+.faq details { border-top: 1px solid var(--crema-oscuro); }
 .faq details:last-child { border-bottom: 1px solid var(--crema-oscuro); }
 .faq summary {
   font-family: var(--serif); font-size: 19px; color: var(--texto); cursor: pointer;
   list-style: none; display: flex; justify-content: space-between; gap: 20px;
+  padding: 20px 0;
 }
 .faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: '+'; font-family: var(--sans); color: var(--sol); flex-shrink: 0; }
+.faq summary::after { content: '+'; font-family: var(--sans); color: var(--verde); flex-shrink: 0; }
 .faq details[open] summary::after { content: '\2212'; }
-.faq details p { font-family: var(--serif); font-size: 16.5px; color: var(--texto-suave); line-height: 1.7; margin-top: 12px; max-width: 680px; }
-
-.texto-medio { font-family: var(--serif); font-size: clamp(19px, 2vw, 22px); line-height: 1.6; color: var(--texto); max-width: 700px; }
-
+.faq details p { font-family: var(--serif); font-size: 16.5px; color: var(--texto-suave); line-height: 1.7; margin: -8px 0 20px; max-width: 680px; }
 
 @media (max-width: 760px) {
   .ad-fila { grid-template-columns: 1fr; gap: 4px; }
