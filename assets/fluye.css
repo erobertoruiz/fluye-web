@@ -481,12 +481,9 @@ nav {
 }
 
 /* ── RESPIRO VISUAL: FOTO A SANGRE COMPLETA ── */
-/* Foto real de Rober: pinar, Inagua (Gran Canaria). Origen: fluye/marca/img/ (repo clau): inagua_pinar.jpg.
-   Banda a sangre completa sin texto, entre "El problema" y "Para quién" — separada a propósito
-   de la sección "Cómo trabajamos" (que tiene su propia foto de fondo) para que no queden dos
-   fotos pegadas. Decisión 12 ago 2026 tras feedback de Rober ("queda raro justo encima de la
-   otra foto"); mismo recurso que se probó una vez con el_fronton_ola.jpg (aquella vez se retiró
-   por la foto/posición en concreto, no por la técnica). */
+/* Pinar de Inagua (Gran Canaria). Origen: fluye/marca/img/inagua_pinar.jpg (repo clau).
+   Banda sin texto en la portada, entre «Dos formas de trabajar» y «Lo repetitivo».
+   No debe quedar pegada a otra sección con foto de fondo (12 ago 2026). */
 .franja-foto {
   height: clamp(180px, 26vw, 320px);
   background: url('pinar_inagua.jpg');
