@@ -1,4 +1,7 @@
 (function () {
+  // El CSS solo oculta lo que se revela al hacer scroll si esta clase existe.
+  document.documentElement.classList.add('js');
+
   document.querySelectorAll('h2.titular, .hero h1').forEach(function (titular) {
     var palabras = titular.textContent.trim().split(/\s+/);
     titular.innerHTML = palabras.map(function (palabra, i) {

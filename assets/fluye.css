@@ -83,12 +83,14 @@ footer :focus-visible { outline-color: var(--crema); }
 }
 
 /* ── REVELADO AL SCROLL ── */
-.reveal {
+/* Solo se oculta si assets/fluye.js ha cargado (pone la clase js en <html>):
+   sin JavaScript, o si el fichero falla, el contenido se ve tal cual. */
+.js .reveal {
   opacity: 0;
   transform: translateY(18px);
   transition: opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1), transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+.js .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ── UTIL ── */
 .eyebrow {
