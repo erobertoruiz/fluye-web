@@ -431,26 +431,26 @@ nav {
 }
 .b2b-card p + p { margin-top: 14px; }
 
-/* Foto real: Timanfaya (Lanzarote). Mismo tratamiento que .fondo-cascada —
-   sección corta (solo eyebrow + card), admite fondo a sangre completa sin
-   tener que re-oscurecer media docena de elementos hijo. Decisión 12 ago 2026. */
-.fondo-timanfaya {
-  background: url('volcan_timanfaya.jpg');
+/* Franja del caso de /agencias/: pinar de Inagua (Gran Canaria), con el mismo
+   velo que .fondo-cascada. El hero de esa página ya usa el volcán de Timanfaya:
+   una foto distinta por sección. */
+.fondo-pinar {
+  background: url('pinar_inagua.jpg');
   background-size: cover;
-  background-position: center 60%;
+  background-position: center 55%;
   position: relative;
   overflow: hidden;
 }
-.fondo-timanfaya::before {
+.fondo-pinar::before {
   content: '';
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(var(--tinta-rgb), 0.75) 0%, rgba(var(--tinta-rgb), 0.55) 55%, rgba(var(--tinta-rgb), 0.72) 100%);
   pointer-events: none;
 }
-.fondo-timanfaya .wrap { position: relative; z-index: 1; }
-.fondo-timanfaya .b2b-card { border-left-color: var(--sol); }
-.fondo-timanfaya .b2b-card p { color: rgba(var(--crema-rgb), 0.88); }
+.fondo-pinar .wrap { position: relative; z-index: 1; }
+.fondo-pinar .b2b-card { border-left-color: var(--sol); }
+.fondo-pinar .b2b-card p { color: rgba(var(--crema-rgb), 0.88); }
 
 /* ── QUIÉNES SOMOS ── */
 .quienes-grid {
